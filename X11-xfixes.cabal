@@ -1,10 +1,10 @@
 name:		        X11-xfixes
 version:	        0.1.1
-license:	        BSD3
+license:	        MIT
 license-file:	        LICENSE
 copyright:	        Aren Olson, 2011
 maintainer:	        Aren Olson <reacocard@gmail.com>
-homepage:               <insert github URL>
+homepage:               https://github.com/reacocard/x11-xfixes
 category:	        Graphics
 synopsis:	        A binding to the Xfixes X11 extension library
 description:	        A Haskell binding to the Xfixes X11 extention graphics library.
