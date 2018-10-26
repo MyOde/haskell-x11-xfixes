@@ -25,7 +25,17 @@ module Graphics.X11.Xfixes (
     xfixesFetchRegion,
     xfixesSetWindowShapeRegion,
     -- xfixesSetGCClipRegion,
-    xfixesExpandRegion
+    xfixesExpandRegion,
+    shapeSet,
+    shapeUnion,
+    shapeIntersect,
+    shapeSubtract,
+    shapeInvert,
+    shapeBounding,
+    shapeClip,
+    shapeInput,
+    shapeNotify,
+    shapeNumberEvents
     ) where
 
 import Foreign
