@@ -23,6 +23,7 @@ module Graphics.X11.Xfixes (
     xfixesTranslateRegion,
     xfixesRegionExtents,
     xfixesFetchRegion,
+    xfixesSetWindowShapeRegion,
     -- xfixesSetGCClipRegion,
     xfixesExpandRegion
     ) where
@@ -34,6 +35,24 @@ import Graphics.X11.Xlib hiding (Region) -- xfixes has its own Region based on X
 #include <X11/Xlib.h>
 
 #include <X11/extensions/Xfixes.h>
+
+-- Shape enum constants
+shapeSet, shapeUnion, shapeIntersect, shapeSubtract, shapeInvert :: CInt
+shapeSet = 0
+shapeUnion = 1
+shapeIntersect = 2
+shapeSubtract = 3
+shapeInvert = 4
+
+shapeBounding, shapeClip, shapeInput :: CInt
+shapeBounding = 0
+shapeClip = 1
+shapeInput = 2
+
+shapeNotify, shapeNumberEvents :: CInt
+-- shapeNotifyMask = -- Whatever, I hope I don't need this
+shapeNotify = 0
+shapeNumberEvents = shapeNotify + 1
 
 
 xfixesQueryExtension :: Display -> IO (Maybe (CInt, CInt))
@@ -129,9 +148,9 @@ foreign import ccall "XFixesFetchRegion"
 -- foreign import ccall "XFixesSetGCClipRegion"
 --     xfixesSetGCClipRegion :: Display -> GC -> CInt -> CInt -> Region -> IO ()
 
--- Disabled as we don't have a binding for the Shape type from the shape extension
---foreign import ccall "XFixesSetWindowShapeRegion"
---    xfixesSetWindowShapeRegion :: Display -> Window -> Shape -> CInt -> CInt -> Region -> IO ()
+-- Enabling, since shape is in fact just an CInt enumerated value
+foreign import ccall "XFixesSetWindowShapeRegion"
+   xfixesSetWindowShapeRegion :: Display -> Window -> CInt -> CInt -> CInt -> Region -> IO ()
 
 -- Disabled due to lack of binding for Picture
 --foreign import ccall "XFixesSetPictureClipRegion"
