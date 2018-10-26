@@ -1,6 +1,3 @@
-
-
-
 -- This is an incomplete binding, patches welcome for binding the rest
 -- of the specification, which is available at
 -- http://cgit.freedesktop.org/xorg/proto/fixesproto/plain/fixesproto.txt
@@ -15,7 +12,7 @@ module Graphics.X11.Xfixes (
     xfixesCreateRegion,
     xfixesCreateRegionFromBitmap,
     xfixesCreateRegionFromWindow,
-    xfixesCreateRegionFromGC,
+    -- xfixesCreateRegionFromGC,
     xfixesDestroyRegion,
     xfixesSetRegion,
     xfixesCopyRegion,
@@ -26,7 +23,7 @@ module Graphics.X11.Xfixes (
     xfixesTranslateRegion,
     xfixesRegionExtents,
     xfixesFetchRegion,
-    xfixesSetGCClipRegion,
+    -- xfixesSetGCClipRegion,
     xfixesExpandRegion
     ) where
 
@@ -86,8 +83,11 @@ foreign import ccall "XFixesCreateRegionFromBitmap"
 foreign import ccall "XFixesCreateRegionFromWindow"
     xfixesCreateRegionFromWindow :: Display -> Window -> WindowRegion -> IO Region
 
-foreign import ccall "XFixesCreateRegionFromGC"
-    xfixesCreateRegionFromGC :: Display -> GC -> IO Region
+-- Disabled due to build error
+-- GC cannot be marshalled in a foreign call
+-- because its data constructor is not in scope
+-- foreign import ccall "XFixesCreateRegionFromGC"
+--     xfixesCreateRegionFromGC :: Display -> GC -> IO Region
 
 -- Disabled due to lack of binding for Picture
 --foreign import ccall "XFixesCreateRegionFromPicture"
@@ -123,8 +123,11 @@ foreign import ccall "XFixesRegionExtents"
 foreign import ccall "XFixesFetchRegion"
     xfixesFetchRegion :: Display -> Region -> CInt -> IO ()
 
-foreign import ccall "XFixesSetGCClipRegion"
-    xfixesSetGCClipRegion :: Display -> GC -> CInt -> CInt -> Region -> IO ()
+-- Disabled due to build error
+-- GC cannot be marshalled in a foreign call
+-- because its data constructor is not in scope
+-- foreign import ccall "XFixesSetGCClipRegion"
+--     xfixesSetGCClipRegion :: Display -> GC -> CInt -> CInt -> Region -> IO ()
 
 -- Disabled as we don't have a binding for the Shape type from the shape extension
 --foreign import ccall "XFixesSetWindowShapeRegion"
